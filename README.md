@@ -45,16 +45,17 @@
 ### info
 > 元信息表
 
-| 字段          | 类型         | 含义           |
-| :---:         | :---:        | :---:          |
-| id            | unsigned int | id             |
-| department    | unsigned int | 部门id         |
-| verify        | tinyint(1)   | 是否已经审核   |
-| title         | varchar(255) | 标题           |
-| desc          | varchar(255) | 描述           |
-| remark        | varchar(255) | 额外信息       |
-| score         | unsigned int | 分值           |
-| maximum_score | unsigned int | 可获取做高分值 |
+| 字段          | 类型         | 含义                   |
+| :---:         | :---:        | :---:                  |
+| id            | unsigned int | id                     |
+| type          | tinyint(1)   | 类型，1自然人，2为企业 |
+| department    | unsigned int | 部门id                 |
+| verify        | tinyint(1)   | 是否已经审核           |
+| title         | varchar(255) | 标题                   |
+| desc          | varchar(255) | 描述                   |
+| remark        | varchar(255) | 额外信息               |
+| score         | unsigned int | 分值                   |
+| maximum_score | unsigned int | 可获取做高分值         |
 
 ### score
 > 评分表
@@ -70,6 +71,8 @@
 | time   | unsigned int(15) | 时间戳 |
 
 
+以上基本数据结构是单系统的数据结构，还有一些暂时没有想到的。
+
 ## 进一步的构想
 
 ### 简单的架构
@@ -82,10 +85,12 @@
 2. 中心节点提供统一接口，各部门可以通过这些接口推送数据
     1. 提供获取个人或者企业元信息的接口
     2. 部门创建元信息时，推送给诚信办审核
-    3. 部门定期推送评分信息
+    3. 部门推送部门相关评分信息
     4. 推送其他信息
     
-3. 部门节点提供统一格式的接口，以供中心节点诚信办推送数据
+3. 部门节点提供统一格式的接口，以供中心节点(诚信办)推送数据和获取数据
     1. 推送元信息数据
     2. 随时获取某部门的某项信息
     3. 其他信息
+
+以上这些信息都是元信息，元信息如何加工由具体业务操作。
